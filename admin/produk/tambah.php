@@ -3,6 +3,7 @@ include '../koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nama = $_POST['nama'];
+    $wa = $_POST['wa'];
     $kategori_id = $_POST['kategori_id'];
     $deskripsi = $_POST['deskripsi'];
     $foto = $_FILES['foto']['name'];
@@ -12,9 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Proses upload foto
     move_uploaded_file($tmp_name, $path . $foto);
 
-    // Simpan data buah beserta kolom-kolom baru
-    $query = "INSERT INTO buah (nama, kategori_id, deskripsi,  foto) 
-              VALUES ('$nama', '$kategori_id', '$deskripsi',  '$foto')";
+    // Simpan data produk beserta kolom-kolom baru
+    $query = "INSERT INTO produk (nama,wa, kategori_id, deskripsi,  foto) 
+              VALUES ('$nama','$wa', '$kategori_id', '$deskripsi',  '$foto')";
 
     $koneksi->query($query);
 
@@ -30,13 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah buah</title>
+    <title>Tambah produk</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 
 <body>
     <div class="container mt-5">
-        <h2>Tambah buah</h2>
+        <h2>Tambah produk</h2>
         <form action="" method="post" enctype="multipart/form-data">
             <!-- Tambahkan enctype untuk mendukung upload file -->
             <div class="mb-3">
@@ -45,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php
                     $kategori = $koneksi->query("SELECT * FROM kategori ORDER BY id DESC");
                     foreach ($kategori as $item) { ?>
-                        <option value="<?= $item['id'] ?>"><?= $item['nama'] ?></option>
+                    <option value="<?= $item['id'] ?>"><?= $item['nama'] ?></option>
                     <?php } ?>
                 </select>
 
@@ -57,6 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="mb-3">
                 <label for="deskripsi" class="form-label">deskripsi:</label>
                 <input type="text" name="deskripsi" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="wa" class="form-label">wa:</label>
+                <input type="text" name="wa" class="form-control" required>
             </div>
             <div class="mb-3">
                 <label for="foto" class="form-label">foto:</label>

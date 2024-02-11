@@ -1,7 +1,7 @@
 <?php
 include 'koneksi.php';
 
-$result_buah = $koneksi->query("SELECT * FROM buah");
+$result_produk = $koneksi->query("SELECT * FROM produk");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +9,7 @@ $result_buah = $koneksi->query("SELECT * FROM buah");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Tentang Buah</title>
+    <title>Website Tentang produk</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -66,7 +66,7 @@ $result_buah = $koneksi->query("SELECT * FROM buah");
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Website Buah</a>
+            <a class="navbar-brand" href="#">BukaWarung</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -82,11 +82,11 @@ $result_buah = $koneksi->query("SELECT * FROM buah");
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Data Buah
+                            Data produk
                         </a>
                         <div class="dropdown-menu" id="kategoriDropdown" aria-labelledby="navbarDropdown">
                             <?php
-                            // Ambil daftar kategori buah
+                            // Ambil daftar kategori produk
                             $result_kategori = $koneksi->query("SELECT * FROM kategori");
                             while ($kategori = $result_kategori->fetch_assoc()) {
                                 echo '<a class="dropdown-item" href="#" data-kategori-id="' . $kategori['id'] . '">' . $kategori['nama'] . '</a>';
@@ -108,16 +108,13 @@ $result_buah = $koneksi->query("SELECT * FROM buah");
         <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="https://www.shutterstock.com/image-photo/creative-layout-made-fruits-flat-600nw-1017075634.jpg"
-                        class="d-block w-100" alt="Slide 1">
+                    <img src="img/sampul.png" class="d-block w-100" alt="Slide 1">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://images.twinkl.co.uk/tw1n/image/private/t_630_eco/image_repo/28/2e/my-bm-1635311592-kad-imbasan-buah-buahan_ver_1.jpg"
-                        class="d-block w-100" alt="Slide 2">
+                    <img src="img/sampul.png" class="d-block w-100" alt="Slide 2">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://www.shutterstock.com/image-vector/fruit-berries-drawn-icons-vector-600nw-1798668463.jpg"
-                        class="d-block w-100" alt="Slide 3">
+                    <img src="img/sampul.png" class="d-block w-100" alt="Slide 3">
                 </div>
             </div>
         </div>
@@ -126,37 +123,30 @@ $result_buah = $koneksi->query("SELECT * FROM buah");
     <!-- Tentang Section -->
     <section class="container mt-1" id="tentang">
         <center>
-            <h1>Tentang Buah-buahan</h1>
+            <h1>Produk BukaWarung </h1>
 
-            <p>Buah-buahan adalah bagian penting dari berbagai tanaman yang dihasilkan dari proses pembungaan. Mereka
-                menjadi sumber utama gizi bagi manusia dan memiliki berbagai bentuk, rasa, dan manfaat kesehatan.</p>
-            <p>Ragam Bentuk dan Warna</p>
-            <p>Buah-buahan datang dalam berbagai bentuk, ukuran, dan warna. Beberapa buah kecil dan bulat, sementara
-                yang lain bisa besar dan berbentuk unik. Warna buah juga bervariasi, mulai dari merah, oranye, kuning,
-                hijau,
-                hingga ungu.</p>
         </center>
 
     </section>
 
     <hr>
 
-    <!-- Data Buah Section -->
+    <!-- Data produk Section -->
     <?php
-    // Ambil daftar kategori buah
+    // Ambil daftar kategori produk
     $result_kategori = $koneksi->query("SELECT * FROM kategori");
 
     while ($kategori = $result_kategori->fetch_assoc()) {
         $kategori_id = $kategori['id'];
-        $result_buah = $koneksi->query("SELECT * FROM buah WHERE kategori_id = $kategori_id");
+        $result_produk = $koneksi->query("SELECT * FROM produk WHERE kategori_id = $kategori_id");
     ?>
-    <section class="container mt-4 kategori-section buah-section" id="buah-<?= $kategori_id ?>">
+    <section class="container mt-4 kategori-section produk-section" id="produk-<?= $kategori_id ?>">
 
         <center>
-            <h2>Data Buah - <?= $kategori['nama'] ?></h2>
+            <h2>List produk - <?= $kategori['nama'] ?></h2>
         </center>
         <div class="row">
-            <?php while ($buah = $result_buah->fetch_assoc()) : ?>
+            <?php while ($produk = $result_produk->fetch_assoc()) : ?>
             <div class="col-md-4 mb-4">
                 <!-- ... (bagian card tetap sama) ... -->
             </div>
@@ -178,7 +168,7 @@ $result_buah = $koneksi->query("SELECT * FROM buah");
                 <div class="col-md-4">
                     <h4>Info Kontak</h4>
                     <p><strong>Telepon:</strong> +62 123 456 789</p>
-                    <p><strong>Email:</strong> info@websitebuah.com</p>
+                    <p><strong>Email:</strong> info@websiteproduk.com</p>
                     <p><strong>Alamat:</strong> Jl. Contoh No. 123, Kota Contoh, Provinsi Contoh</p>
                     <p><strong>Kode Pos:</strong> 12345</p>
                 </div>
@@ -218,39 +208,39 @@ $result_buah = $koneksi->query("SELECT * FROM buah");
 
     <!-- Script untuk menangani klik pada kategori -->
     <script>
-    function hideAllBuahSections() {
-        $('.buah-section').hide();
+    function hideAllprodukSections() {
+        $('.produk-section').hide();
     }
 
-    function showBuahSection(kategoriId) {
-        hideAllBuahSections();
-        $('#buah-' + kategoriId).show();
+    function showprodukSection(kategoriId) {
+        hideAllprodukSections();
+        $('#produk-' + kategoriId).show();
     }
 
     $(document).ready(function() {
-        hideAllBuahSections(); // Sembunyikan semua section saat halaman dimuat
+        hideAllprodukSections(); // Sembunyikan semua section saat halaman dimuat
 
         $('#kategoriDropdown .dropdown-item').click(function(e) {
             e.preventDefault();
             var kategoriId = $(this).data('kategori-id');
-            loadBuahByKategori(kategoriId);
+            loadprodukByKategori(kategoriId);
         });
     });
 
-    function loadBuahByKategori(kategoriId) {
-        // Gunakan AJAX untuk memuat data buah sesuai dengan kategoriId
+    function loadprodukByKategori(kategoriId) {
+        // Gunakan AJAX untuk memuat data produk sesuai dengan kategoriId
         $.ajax({
             type: 'GET',
-            url: 'load_buah_by_kategori.php', // Ganti dengan URL sesuai dengan struktur proyek Anda
+            url: 'load_produk_by_kategori.php', // Ganti dengan URL sesuai dengan struktur proyek Anda
             data: {
                 kategori_id: kategoriId
             },
             success: function(data) {
-                // Gantilah kontennya dengan data buah yang baru
-                $('#buah-' + kategoriId + ' .row').html(data);
+                // Gantilah kontennya dengan data produk yang baru
+                $('#produk-' + kategoriId + ' .row').html(data);
 
                 // Tampilkan section setelah memuat data
-                showBuahSection(kategoriId);
+                showprodukSection(kategoriId);
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText);

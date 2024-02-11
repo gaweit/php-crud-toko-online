@@ -2,7 +2,7 @@
 $host = 'localhost';
 $user = 'root'; // Ganti dengan username MySQL Anda
 $pass = ''; // Ganti dengan password MySQL Anda
-$db   = 'buah_db';
+$db   = 'toko-online-php';
 
 $koneksi = new mysqli($host, $user, $pass, $db);
 

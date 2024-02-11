@@ -1,19 +1,19 @@
 <?php
 include '../koneksi.php';
 
-// Ambil ID buah dari parameter URL
-$id_buah = isset($_GET['id']) ? $_GET['id'] : die('ID buah tidak valid.');
+// Ambil ID produk dari parameter URL
+$id_produk = isset($_GET['id']) ? $_GET['id'] : die('ID produk tidak valid.');
 
-// Ambil data buah berdasarkan ID dari database
-$query = "SELECT buah.*, kategori.nama AS nama_kategori FROM buah
-LEFT JOIN kategori ON buah.kategori_id = kategori.id WHERE buah.id = $id_buah";
+// Ambil data produk berdasarkan ID dari database
+$query = "SELECT produk.*, kategori.nama AS nama_kategori FROM produk
+LEFT JOIN kategori ON produk.kategori_id = kategori.id WHERE produk.id = $id_produk";
 $result = $koneksi->query($query);
 
-// Cek apakah data buah ditemukan
+// Cek apakah data produk ditemukan
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
 } else {
-    die('Data buah tidak ditemukan.');
+    die('Data produk tidak ditemukan.');
 }
 
 // Proses form jika ada data yang dikirimkan
@@ -39,14 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $foto = $row['foto'];
     }
 
-    // Update data buah ke database
-    $update_query = "UPDATE buah SET nama = '$nama', kategori_id = $kategori_id, deskripsi = '$deskripsi', foto = '$foto' WHERE id = $id_buah";
+    // Update data produk ke database
+    $update_query = "UPDATE produk SET nama = '$nama', kategori_id = $kategori_id, deskripsi = '$deskripsi', foto = '$foto' WHERE id = $id_produk";
 
     if ($koneksi->query($update_query)) {
         header('Location: index.php');
         exit();
     } else {
-        echo 'Gagal mengupdate data buah: ' . $koneksi->error;
+        echo 'Gagal mengupdate data produk: ' . $koneksi->error;
     }
 }
 ?>
@@ -57,20 +57,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit buah</title>
+    <title>Edit produk</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 
 <body>
     <div class="container mt-5">
-        <h2>Edit buah</h2>
+        <h2>Edit produk</h2>
         <form action="" method="post" enctype="multipart/form-data">
             <div class="mb-3">
-                <label for="nama" class="form-label">Nama buah</label>
+                <label for="nama" class="form-label">Nama produk</label>
                 <input type="text" class="form-control" id="nama" name="nama" value="<?= $row['nama'] ?>" required>
             </div>
             <div class="mb-3">
-                <label for="kategori_id" class="form-label">Kategori buah</label>
+                <label for="kategori_id" class="form-label">Kategori produk</label>
                 <select name="kategori_id" id="kategori_id" class="form-control" required>
                     <?php
                     $kategori = $koneksi->query("SELECT * FROM kategori ORDER BY id DESC");
@@ -81,14 +81,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </select>
             </div>
             <div class="mb-3">
-                <label for="deskripsi" class="form-label">Deskripsi buah</label>
+                <label for="deskripsi" class="form-label">Deskripsi produk</label>
                 <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"><?= $row['deskripsi'] ?></textarea>
             </div>
             <div class="mb-3">
-                <label for="foto" class="form-label">Foto buah</label>
+                <label for="foto" class="form-label">Foto produk</label>
                 <input type="file" class="form-control" id="foto" name="foto">
                 <?php if ($row['foto']) : ?>
-                    <img src="uploads/<?= $row['foto'] ?>" alt="foto buah" class="mt-2" style="max-width: 300px;">
+                    <img src="uploads/<?= $row['foto'] ?>" alt="foto produk" class="mt-2" style="max-width: 300px;">
                 <?php endif; ?>
             </div>
             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>

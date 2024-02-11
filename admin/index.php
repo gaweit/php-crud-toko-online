@@ -41,9 +41,9 @@ include '../koneksi.php';
             <div class="col-md-6 mb-5">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Data buah</h5>
-                        <p class="card-text">Lihat dan kelola data buah.</p>
-                        <a href="buah/index.php" class="btn btn-primary">Lihat Data buah</a>
+                        <h5 class="card-title">Data produk</h5>
+                        <p class="card-text">Lihat dan kelola data produk.</p>
+                        <a href="produk/index.php" class="btn btn-primary">Lihat Data produk</a>
                     </div>
                 </div>
             </div>

@@ -8,11 +8,11 @@ if (!isset($_SESSION['username'])) {
 
 include '../koneksi.php';
 
-// $result = $koneksi->query("SELECT * FROM buah ORDER BY id DESC");
+// $result = $koneksi->query("SELECT * FROM produk ORDER BY id DESC");
 
-$result = $koneksi->query("SELECT buah.*, kategori.nama AS nama_kategori FROM buah
-                            LEFT JOIN kategori ON buah.kategori_id = kategori.id
-                            ORDER BY buah.id DESC");
+$result = $koneksi->query("SELECT produk.*, kategori.nama AS nama_kategori FROM produk
+                            LEFT JOIN kategori ON produk.kategori_id = kategori.id
+                            ORDER BY produk.id DESC");
 ?>
 
 <!DOCTYPE html>
@@ -21,21 +21,22 @@ $result = $koneksi->query("SELECT buah.*, kategori.nama AS nama_kategori FROM bu
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD buah</title>
+    <title>CRUD produk</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 
 <body>
     <div class="container mt-5">
         <a href="../index.php" class="btn btn-warning mb-3">Beranda</a>
-        <h2>Data buah</h2>
-        <a href="tambah.php" class="btn btn-primary mb-3">Tambah buah</a>
+        <h2>Data produk</h2>
+        <a href="tambah.php" class="btn btn-primary mb-3">Tambah produk</a>
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>No</th>
                     <th>Kategori</th>
                     <th>Nama</th>
+                    <th>WA</th>
                     <!-- <th>Deskripsi</th> -->
                     <th>foto</th>
                     <th>Aksi</th>
@@ -48,6 +49,7 @@ $result = $koneksi->query("SELECT buah.*, kategori.nama AS nama_kategori FROM bu
                         <td><?= $urutan++ ?></td>
                         <td><?= $row['nama_kategori'] ?></td>
                         <td><?= $row['nama'] ?></td>
+                        <td><?= $row['wa'] ?></td>
                         <!-- <td><?= $row['deskripsi'] ?></td> -->
                         <td style="width: 200px;"><img style="width: 200px;" src="uploads/<?= $row['foto'] ?>" alt="">
                         </td>

@@ -1,19 +1,19 @@
 <?php
 include '../koneksi.php';
 
-// Ambil ID buah dari parameter URL
-$id_buah = isset($_GET['id']) ? $_GET['id'] : die('ID buah tidak valid.');
+// Ambil ID produk dari parameter URL
+$id_produk = isset($_GET['id']) ? $_GET['id'] : die('ID produk tidak valid.');
 
-// Ambil data buah berdasarkan ID dari database
-$query = "SELECT buah.*, kategori.nama AS nama_kategori FROM buah
-LEFT JOIN kategori ON buah.kategori_id = kategori.id WHERE buah.id = $id_buah";
+// Ambil data produk berdasarkan ID dari database
+$query = "SELECT produk.*, kategori.nama AS nama_kategori FROM produk
+LEFT JOIN kategori ON produk.kategori_id = kategori.id WHERE produk.id = $id_produk";
 $result = $koneksi->query($query);
 
-// Cek apakah data buah ditemukan
+// Cek apakah data produk ditemukan
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
 } else {
-    die('Data buah tidak ditemukan.');
+    die('Data produk tidak ditemukan.');
 }
 
 ?>
@@ -24,16 +24,16 @@ if ($result->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail buah</title>
+    <title>Detail produk</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 
 <body>
     <div class="container mt-5">
-        <h2>Detail buah</h2>
+        <h2>Detail produk</h2>
         <table class="table table-bordered">
             <tr>
-                <td colspan="2"><img style="width: 300px;" src="uploads/<?= $row['foto'] ?>" alt="foto buah"></td>
+                <td colspan="2"><img style="width: 300px;" src="uploads/<?= $row['foto'] ?>" alt="foto produk"></td>
             </tr>
             <tr>
                 <td><strong>Nama</strong></td>
